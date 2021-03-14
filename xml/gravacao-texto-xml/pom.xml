@@ -61,7 +61,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.mainClass>
         TODO: classe principal do programa
-            com.github.newtonjose.engenharia-software-spd/xml/gravacao-texto-xml.application.console.ProgramaCalendario
+                        <!-- com.github.newtonjose.engenharia-software-spd/xml/gravacao-texto-xml.application.console.ProgramaCalendario -->
         </project.mainClass>
 
         <tools.dir>${project.basedir}/tools</tools.dir>
