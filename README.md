@@ -9,4 +9,7 @@
 
 ### aula02
 
-### aula03
+### aula03 - XML (eXtensible Markup Language)
+
+- [Atividade 01]()
+  Gravação em arquivos de texto xml usando um programa implementado em Java/Groovy.
