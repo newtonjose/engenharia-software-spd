@@ -77,8 +77,7 @@ class Console {
 
         println "Digite:\n" +
                 "1 - Criar um novo funcionário\n" +
-                "2 - Para visualizar os dodos de um funcionário " +
-                "cadastrado"
+                "2 - Visualizar os dodos de um funcionário"
 
         def opcao = scanner.readLine() as int
 
