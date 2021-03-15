@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.newtonjose</groupId>
@@ -55,13 +56,12 @@
     </scm>
 
     <properties>
-        <java.version>8</java.version>
+        <java.version>11</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.mainClass>
-        TODO: classe principal do programa
-                        <!-- com.github.newtonjose.engenharia-software-spd/xml/gravacao-texto-xml.application.console.ProgramaCalendario -->
+            com.github.newtonjose.gravacao.application.Console
         </project.mainClass>
 
         <tools.dir>${project.basedir}/tools</tools.dir>
@@ -73,6 +73,8 @@
         <dockerfile-maven-plugin.version>1.4.13</dockerfile-maven-plugin.version>
         <h2.versao>1.4.200</h2.versao>
         <jacoco.version>0.8.6</jacoco.version>
+        <groovy.version>3.0.7</groovy.version>
+        <gmavenplus.version>1.12.1</gmavenplus.version>
         <junit.versao>5.7.0</junit.versao>
         <log4j2.version>2.14.0</log4j2.version>
         <maven.compiler.plugin>3.8.1</maven.compiler.plugin>
@@ -89,9 +91,23 @@
         <spotbugs-maven-plugin>4.1.3</spotbugs-maven-plugin>
         <surefire.versao>2.22.2</surefire.versao>
         <findsecbugs-plugin.version>1.10.1</findsecbugs-plugin.version>
+        <xstream.version>1.4.16</xstream.version>
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>${groovy.version}</version>
+            <type>pom</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+            <version>${xstream.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -157,7 +173,6 @@
                         </dependency>
                     </dependencies>
                 </plugin>
-
             </plugins>
         </pluginManagement>
 
@@ -165,6 +180,36 @@
         <finalName>gravacao-texto-xml</finalName>
 
         <plugins>
+            <plugin>
+                <groupId>org.codehaus.gmavenplus</groupId>
+                <artifactId>gmavenplus-plugin</artifactId>
+                <version>${gmavenplus.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>execute</goal>
+                            <goal>addSources</goal>
+                            <goal>addTestSources</goal>
+                            <goal>generateStubs</goal>
+                            <goal>compile</goal>
+                            <goal>generateTestStubs</goal>
+                            <goal>compileTests</goal>
+                            <goal>removeStubs</goal>
+                            <goal>removeTestStubs</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.codehaus.groovy</groupId>
+                        <artifactId>groovy-all</artifactId>
+                        <!-- any version of Groovy \>= 1.5.0 should work here -->
+                        <version>${groovy.version}</version>
+                        <scope>runtime</scope>
+                        <type>pom</type>
+                    </dependency>
+                </dependencies>
+            </plugin>
 
             <!-- spotbugs -->
             <!-- mvn compile           -->
@@ -786,23 +831,23 @@
                     <!-- Configura arquivo MANIFEST.MF                     -->
                     <!-- Class-Path: formado pelos arquivos em 'jars'      -->
                     <!-- Main-Class: classe a ser executada (método main)) -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-jar-plugin</artifactId>
-                        <version>3.1.2</version>
-                        <configuration>
-                            <finalName>gravacao-texto-xml-dir</finalName>
-                            <archive>
-                                <!-- Evita inclusão dir 'maven' em META-INF -->
-                                <addMavenDescriptor>false</addMavenDescriptor>
-                                <manifest>
-                                    <addClasspath>true</addClasspath>
-                                    <classpathPrefix>jars/</classpathPrefix>
-                                    <mainClass>${project.mainClass}</mainClass>
-                                </manifest>
-                            </archive>
-                        </configuration>
-                    </plugin>
+<!--                    <plugin>-->
+<!--                        <groupId>org.apache.maven.plugins</groupId>-->
+<!--                        <artifactId>maven-jar-plugin</artifactId>-->
+<!--                        <version>3.1.2</version>-->
+<!--                        <configuration>-->
+<!--                            <finalName>gravacao-texto-xml-dir</finalName>-->
+<!--                            <archive>-->
+<!--                                &lt;!&ndash; Evita inclusão dir 'maven' em META-INF &ndash;&gt;-->
+<!--                                <addMavenDescriptor>false</addMavenDescriptor>-->
+<!--                                <manifest>-->
+<!--                                    <addClasspath>true</addClasspath>-->
+<!--                                    <classpathPrefix>jars/</classpathPrefix>-->
+<!--                                    <mainClass>${project.mainClass}</mainClass>-->
+<!--                                </manifest>-->
+<!--                            </archive>-->
+<!--                        </configuration>-->
+<!--                    </plugin>-->
 
                 </plugins>
             </build>
