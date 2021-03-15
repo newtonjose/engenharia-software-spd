@@ -40,7 +40,11 @@ class Console {
 
         String xmlDoc = xstream.toXML(func)
 
-        arqUtils.escreveArquivoTexto(cpf + ".xml", xmlDoc)
+        try{
+            arqUtils.escreveArquivoTexto(cpf + ".xml", xmlDoc)
+        } catch (IOException ioe) {
+            System.err.println ioe.getMessage()
+        }
     }
 
     private static void lerFuncionarioXML() {
