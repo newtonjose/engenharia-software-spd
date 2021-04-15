@@ -1,4 +1,7 @@
-package main.java.servlets;
+package main.java.github.newtonjose.application.servlets;
+
+import main.java.github.newtonjose.domain.models.Candidato;
+import main.java.github.newtonjose.domain.dao.CandidatoDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -6,15 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @WebServlet(name = "CadastrarCandidato", urlPatterns = {"/candidatos/cadastro"})
 public class CadastrarCandidato extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         String name = request.getParameter("inputName");
-        String gender = request.getParameter("radioOptions");
+        char gender = request.getParameter("radioOptions").charAt(0);
         LocalDate date = LocalDate.parse(
                 request.getParameter("datePicker"),
                 DateTimeFormatter.ofPattern("dd/MM/yyyy")
@@ -22,7 +25,16 @@ public class CadastrarCandidato extends HttpServlet {
         String cargo = request.getParameter("inputCargo");
         String resume = request.getParameter("inputResumo");
 
-        System.out.println(date);
-//        response.sendRedirect("/index.html");
+        Candidato candidato = new Candidato(name, gender, date, cargo, resume);
+
+        try {
+            CandidatoDao cDao = new CandidatoDao();
+            cDao.insert(candidato);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println(e);
+        }
+
+        response.sendRedirect("/index.html");
     }
 }
