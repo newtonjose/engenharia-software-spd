@@ -17,48 +17,49 @@
     <title>Controle de Candidatos</title>
 </head>
 <body>
-<form>
-    <div class="mb-3">
+<form class="mt-3 ms-3" method="post"
+      action="/candidatos/cadastro">
+    <div class="mb-3 col-sm-2">
         <label for="inputName" class="form-label">Nome</label>
         <input type="text" class="form-control" id="inputName"
                aria-describedby="emailHelp">
     </div>
 
 
-    <div class="mb-3">
+    <div class="mb-3 col-sm-3">
         <label for="genderGroup" class="form-label">Selecione um gênero</label>
         <div class="group" id="genderGroup">
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio"
-                       name="inlineRadioOptions" id="genderType1" value="M">
+                       name="genderOptions" id="genderType1" value="M">
                 <label class="form-check-label" for="genderType1">Masculino</label>
             </div>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio"
-                       name="inlineRadioOptions" id="genderType2" value="F">
+                       name="genderOptions" id="genderType2" value="F">
                 <label class="form-check-label" for="genderType2">Feminino</label>
             </div>
 
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio"
-                       name="inlineRadioOptions" id="genderType3" value="O">
+                       name="genderOptions" id="genderType3" value="O">
                 <label class="form-check-label" for="genderType3">Outro(s)</label>
             </div>
         </div>
     </div>
 
-    <div class="mb-3">
+    <div class="mb-3 col-sm-2">
         <label for="datepicker" class="form-label">Data de Nascimento</label>
         <input type="text" class="form-control" id="datepicker"
                placeholder="DD/MM/AAAA" data-date-format="dd/mm/yyyy">
     </div>
 
-    <div class="mb-3">
+    <div class="mb-3 col-sm-3">
         <label for="inputCargo" class="form-label">Cargo Pretendido</label>
         <input type="text" class="form-control" id="inputCargo">
     </div>
 
-    <div class="mb-3">
+    <div class="mb-3 col-sm-4">
         <span class="input-group-text">Resumo do Currículo</span>
         <textarea class="form-control" aria-label="With textarea"></textarea>
     </div>
