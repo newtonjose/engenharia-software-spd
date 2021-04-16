@@ -32,6 +32,7 @@
   <div class="mb-3 col-sm-2">
     <label for="inputName" class="form-label">Nome</label>
     <input
+        maxlength="60"
         class="form-control"
         type="text"
         name="inputName"
@@ -49,6 +50,7 @@
             name="genderOptions"
             id="genderType1"
             value="M"
+            checked
         >
         <label class="form-check-label"
                for="genderType1">Masculino</label>
@@ -78,8 +80,11 @@
   </div>
 
   <div class="mb-3 col-sm-2">
+<!--    <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>-->
+
     <label for="datePicker" class="form-label">Data de Nascimento</label>
     <input
+        required
         id="datePicker"
         name="datePicker"
         class="form-control"
@@ -90,9 +95,11 @@
   </div>
 
   <div class="mb-3 col-sm-3">
-    <label for="inputCargo" class="form-label">Cargo Pretendido</label>
+    <label for="inputCargo" class="form-label">Cargo
+      Pretendido</label>
     <input
         type="text"
+        maxlength="25"
         class="form-control"
         name="inputCargo"
         id="inputCargo"
@@ -100,8 +107,15 @@
   </div>
 
   <div class="mb-3 col-sm-4">
-    <span class="input-group-text">Resumo do Currículo</span>
+    <span class="input-group-text">Resumo do Currículo
+    <span class="d-inline-block" tabindex="0" data-toggle="tooltip"
+          title="Tamanho máximo de 800 caracteres">
+      <p>(?)</p>
+  </span>
+    </span>
     <textarea
+        maxlength="800"
+        id="inputResumo"
         class="form-control"
         name="inputResumo"
         aria-label="With textarea"
@@ -112,11 +126,15 @@
 </form>
 
 <script type="text/javascript">
-    $('#datepicker').datepicker({
+    $('#datePicker').datepicker({
         format: "dd/mm/yyyy",
         language: "pt-BR",
         orientation: 'auto'
     });
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
 </script>
 </body>
 </html>
