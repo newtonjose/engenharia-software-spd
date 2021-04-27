@@ -1,4 +1,4 @@
-package main.java.github.newtonjose.domain;
+package main.java.github.newtonjose.domain.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -1,6 +1,6 @@
 package main.java.github.newtonjose.domain.dao;
 
-import main.java.github.newtonjose.domain.ConnDB;
+import main.java.github.newtonjose.domain.db.ConnDB;
 import main.java.github.newtonjose.domain.models.Candidato;
 
 import java.sql.Connection;
