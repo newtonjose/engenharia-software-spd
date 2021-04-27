@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -17,7 +16,7 @@ import java.time.format.DateTimeFormatter;
 public class CadastrarCandidato extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("inputName");
-        char gender = request.getParameter("radioOptions").charAt(0);
+        char gender = request.getParameter("genderOptions").charAt(0);
         LocalDate date = LocalDate.parse(
                 request.getParameter("datePicker"),
                 DateTimeFormatter.ofPattern("dd/MM/yyyy")
@@ -27,13 +26,8 @@ public class CadastrarCandidato extends HttpServlet {
 
         Candidato candidato = new Candidato(name, gender, date, cargo, resume);
 
-        try {
-            CandidatoDao cDao = new CandidatoDao();
-            cDao.insert(candidato);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.err.println(e);
-        }
+        CandidatoDao cDao = new CandidatoDao();
+        cDao.insert(candidato);
 
         response.sendRedirect("/index.html");
     }

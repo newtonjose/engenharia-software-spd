@@ -8,6 +8,11 @@ public class Candidato {
     private LocalDate bornDate;
     private String jobPosition;
     private String curriculumnResume;
+    private int codigo;
+
+    public Candidato() {
+
+    }
 
     public Candidato(String name, char gender, LocalDate date, String cargo, String resume) {
         this.name = name;
@@ -35,5 +40,13 @@ public class Candidato {
 
     public String getCurriculumResume() {
         return this.curriculumnResume;
+    }
+
+    public void setCodigo(int codigo){
+        this.codigo = codigo;
+    }
+
+    public int getCodigo() {
+        return this.codigo;
     }
 }
