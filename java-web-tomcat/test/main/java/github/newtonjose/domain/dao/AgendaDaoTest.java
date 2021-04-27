@@ -39,8 +39,21 @@ class AgendaDaoTest {
                 1, null
         );
 
-        dao.insert(a1);
-        dao.insert(a2);
-        dao.insert(a3);
+        dao.create(a1);
+        dao.create(a2);
+        dao.create(a3);
+    }
+
+    @Test
+    void atualizar () {
+        Agenda a3 = new Agenda(
+                'N', "Jerry M. Hatley", "00090322150",
+                LocalDate.of(2020, Month.APRIL, 28),
+                1, "Posto de Saude Rua da Cana",
+                3, LocalDate.of(2020, Month.APRIL, 27)
+        );
+
+        a3.setCodigo(1);
+        dao.atualizar(a3);
     }
 }

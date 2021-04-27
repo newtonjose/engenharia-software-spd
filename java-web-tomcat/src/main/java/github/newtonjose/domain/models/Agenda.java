@@ -4,9 +4,9 @@ import java.time.LocalDate;
 import java.util.Date;
 
 /*
-    codigo                          INT PK (pode ou não ser autoincremento, à escolha)
-    periodo                        char(1)    --M, V ou N (matutino, vespertino, noturno)
-    nomepaciente           varchar(60)
+    codigo               INT PK (pode ou não ser autoincremento, à escolha)
+    periodo              char(1)    --M, V ou N (matutino, vespertino,noturno)
+    nomepaciente             varchar(60)
     cpf                                 varchar(11)
     data                              DATE
     dose                              int   -- 1 ou 2 (1ª dose ou 2ª dose)
@@ -68,6 +68,14 @@ public class Agenda {
 
     public LocalDate getDatabaixa() {
         return databaixa;
+    }
+
+    public void setCodigo(int cod) {
+        codigo = cod;
+    }
+
+    public int getCodigo() {
+        return codigo;
     }
 }
 

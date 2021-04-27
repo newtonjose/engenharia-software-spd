@@ -20,7 +20,7 @@ class AgendaDao {
         }
     }
 
-    void insert(Agenda agenda) {
+    void create(Agenda agenda) {
         String sql = "INSERT INTO vacinacao.agenda(" +
                 "periodo, nomepaciente, cpf, data, dose, local, situacao, databaixa" +
                 ") VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -44,4 +44,35 @@ class AgendaDao {
             System.err.println(sqle.getMessage());
         }
     }
+
+    public void atualizar(Agenda ag) {
+        try {
+            PreparedStatement statment = conn.prepareStatement(
+                    "UPDATE vacinacao.agenda SET situacao = ? WHERE codigo = ?"
+            );
+
+            statment.setInt(1, ag.getSituacao());
+            statment.setInt(2, ag.getCodigo());
+
+            updateDatabaixa(ag);
+
+            statment.execute();
+            statment.close();
+        } catch (SQLException sqle) {
+            System.err.println(sqle.getMessage());
+        }
+    }
+
+    private void updateDatabaixa(Agenda ag) throws SQLException {
+        PreparedStatement statment = conn.prepareStatement(
+                "UPDATE vacinacao.agenda SET databaixa = ? WHERE codigo = ?"
+        );
+
+        statment.setDate(1, java.sql.Date.valueOf(ag.getDatabaixa()));
+        statment.setInt(2, ag.getCodigo());
+
+        statment.execute();
+        statment.close();
+    }
+
 }
