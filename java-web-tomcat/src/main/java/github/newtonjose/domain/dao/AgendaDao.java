@@ -5,7 +5,10 @@ import main.java.github.newtonjose.domain.models.Agenda;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 class AgendaDao {
@@ -20,7 +23,7 @@ class AgendaDao {
         }
     }
 
-    void create(Agenda agenda) {
+    void inserir(Agenda agenda) {
         String sql = "INSERT INTO vacinacao.agenda(" +
                 "periodo, nomepaciente, cpf, data, dose, local, situacao, databaixa" +
                 ") VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -45,7 +48,7 @@ class AgendaDao {
         }
     }
 
-    public void atualizar(Agenda ag) {
+    void atualizar(Agenda ag) {
         try {
             PreparedStatement statment = conn.prepareStatement(
                     "UPDATE vacinacao.agenda SET situacao = ? WHERE codigo = ?"
@@ -61,6 +64,57 @@ class AgendaDao {
         } catch (SQLException sqle) {
             System.err.println(sqle.getMessage());
         }
+    }
+
+    List<Agenda> listarTodas() {
+        String sql = "SELECT * FROM vacinacao.agenda " +
+                "ORDER BY situacao, data, nomepaciente";
+
+        return listar(sql);
+    }
+
+    List<Agenda> listarAtivas() {
+        String sql = "SELECT * FROM vacinacao.agenda WHERE situacao < 3 " +
+                "ORDER BY situacao";
+        return listar(sql);
+    }
+
+    List<Agenda>  listarCanceladas() {
+        String sql = "SELECT * FROM vacinacao.agenda WHERE situacao = 3";
+        return listar(sql);
+    }
+
+    private List<Agenda> listar(String sql) {
+        List<Agenda> agendaList = new ArrayList<>();
+
+        try {
+            PreparedStatement statment = conn.prepareStatement(sql);
+            ResultSet result = statment.executeQuery();
+
+            while (result.next()) {
+                Agenda agenda = new Agenda(
+                        result.getString("periodo").charAt(0),
+                        result.getString("nomepaciente"),
+                        result.getString("cpf"),
+                        result.getDate("data").toLocalDate(),
+                        result.getInt("dose"),
+                        result.getString("local"),
+                        result.getInt("situacao"),
+                        result.getDate("databaixa") != null ? result.getDate(
+                                "databaixa").toLocalDate() : null
+                );
+
+                agenda.setCodigo(result.getInt("codigo"));
+
+                agendaList.add(agenda);
+            }
+
+            statment.close();
+        } catch (SQLException sqle) {
+            System.err.println(sqle.getMessage());
+        }
+
+        return agendaList;
     }
 
     private void updateDatabaixa(Agenda ag) throws SQLException {

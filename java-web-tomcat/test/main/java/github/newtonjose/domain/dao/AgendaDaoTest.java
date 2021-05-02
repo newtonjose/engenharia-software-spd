@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.List;
 
 
 class AgendaDaoTest {
@@ -39,13 +40,13 @@ class AgendaDaoTest {
                 1, null
         );
 
-        dao.create(a1);
-        dao.create(a2);
-        dao.create(a3);
+        dao.inserir(a1);
+        dao.inserir(a2);
+        dao.inserir(a3);
     }
 
     @Test
-    void atualizar () {
+    void atualizar() {
         Agenda a3 = new Agenda(
                 'N', "Jerry M. Hatley", "00090322150",
                 LocalDate.of(2020, Month.APRIL, 28),
@@ -55,5 +56,29 @@ class AgendaDaoTest {
 
         a3.setCodigo(1);
         dao.atualizar(a3);
+    }
+
+    @Test
+    void listarTodas() {
+        List<Agenda> list = dao.listarTodas();
+
+        list.forEach(agenda -> System.out.println("Nome: " + agenda.getNomepaciente() + " Situa" +
+                "ção " + agenda.getSituacao()));
+    }
+
+    @Test
+    void listarCanceladas() {
+        List<Agenda> list = dao.listarCanceladas();
+
+        list.forEach(agenda -> System.out.println("Nome: " + agenda.getNomepaciente() + " Situa" +
+                "ção " + agenda.getSituacao()));
+    }
+
+    @Test
+    void listarAtivas() {
+        List<Agenda> list = dao.listarAtivas();
+
+        list.forEach(agenda -> System.out.println("Nome: " + agenda.getNomepaciente() + " Situa" +
+                "ção " + agenda.getSituacao()));
     }
 }
