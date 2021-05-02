@@ -23,70 +23,79 @@
       src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/locales/bootstrap-datepicker.pt-BR.min.js"
   ></script>
 
-  <title>Controle de Candidatos</title>
+  <title>Controle de Agenda</title>
 </head>
 <body>
 
-<form class="mt-3 ms-3" method="post"
-      action="/candidatos/cadastro">
+<form class="mt-3 ms-3" method="post" action="/agenda/cadastro">
   <div class="mb-3 col-sm-2">
-    <label for="inputName" class="form-label">Nome</label>
+    <label for="inputNomePaciente" class="form-label">Nome do Paciente</label>
     <input
         maxlength="60"
         class="form-control"
         type="text"
-        name="inputName"
-        id="inputName"
+        name="inputNomePaciente"
+        id="inputNomePaciente"
+    >
+  </div>
+
+  <div class="mb-3 col-sm-2">
+    <label for="inputCpf" class="form-label">CPF</label>
+    <input
+        maxlength="11"
+        type="number"
+        min="0"
+        class="form-control"
+        name="inputCpf"
+        id="inputCpf"
     >
   </div>
 
   <div class="mb-3 col-sm-3">
-    <label for="genderGroup" class="form-label">Selecione um gênero</label>
-    <div class="group" id="genderGroup">
+    <label for="periodoGroup" class="form-label">Periodo de Atendimento</label>
+    <div class="group" id="periodoGroup">
       <div class="form-check form-check-inline">
         <input
             class="form-check-input"
             type="radio"
-            name="genderOptions"
-            id="genderType1"
+            name="periodoOptions"
+            id="periodoType1"
             value="M"
             checked
         >
         <label class="form-check-label"
-               for="genderType1">Masculino</label>
+               for="periodoType1">Matutino</label>
       </div>
       <div class="form-check form-check-inline">
         <input
-            id="genderType2"
-            name="genderOptions"
+            id="periodoType2"
+            name="periodoOptions"
             class="form-check-input"
             type="radio"
-            value="F"
+            value="V"
         >
-        <label class="form-check-label" for="genderType2">Feminino</label>
+        <label class="form-check-label" for="periodoType2">Vespertino</label>
       </div>
 
       <div class="form-check form-check-inline">
         <input
-            id="genderType3"
-            name="genderOptions"
+            id="periodoType3"
+            name="periodoOptions"
             class="form-check-input"
             type="radio"
-            value="O"
+            value="N"
         >
-        <label class="form-check-label" for="genderType3">Outro(s)</label>
+        <label class="form-check-label" for="periodoType3">Noturno</label>
       </div>
     </div>
   </div>
 
-  <div class="mb-3 col-sm-2">
-<!--    <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>-->
-
-    <label for="datePicker" class="form-label">Data de Nascimento</label>
+  <div class="mb-3 col-sm-1">
+    <label for="dataPicker" class="form-label">Data</label>
     <input
         required
-        id="datePicker"
-        name="datePicker"
+        id="dataPicker"
+        name="dataPicker"
         class="form-control"
         type="text"
         placeholder="DD/MM/AAAA"
@@ -94,39 +103,43 @@
     >
   </div>
 
+  <div class="mb-3 col-sm-1">
+    <label for="selectDose" class="form-label">Dose</label>
+    <select class="form-select" aria-label="dose" id="selectDose" required>
+      <option selected>Selecione uma dose</option>
+      <option value="1">1ª dose</option>
+      <option value="2">2ª dose</option>
+    </select>
+  </div>
+
   <div class="mb-3 col-sm-3">
-    <label for="inputCargo" class="form-label">Cargo
-      Pretendido</label>
+    <label for="inputLocal" class="form-label">Local</label>
     <input
+        required
         type="text"
-        maxlength="25"
+        maxlength="30"
         class="form-control"
-        name="inputCargo"
-        id="inputCargo"
+        name="inputLocal"
+        id="inputLocal"
     >
   </div>
 
-  <div class="mb-3 col-sm-4">
-    <span class="input-group-text">Resumo do Currículo
-    <span class="d-inline-block" tabindex="0" data-toggle="tooltip"
-          title="Tamanho máximo de 800 caracteres">
-      <p>(?)</p>
-  </span>
-    </span>
-    <textarea
-        maxlength="800"
-        id="inputResumo"
-        class="form-control"
-        name="inputResumo"
-        aria-label="With textarea"
-    ></textarea>
+
+  <div class="mb-3 col-sm-1">
+    <label for="selectSituacao" class="form-label">Dose</label>
+    <select class="form-select" aria-label="dose" id="selectSituacao" required>
+      <option selected>Selecione uma situação</option>
+      <option value="1">1-agendado</option>
+      <option value="2">2-executado</option>
+      <option value="3">3-cancelado</option>
+    </select>
   </div>
 
   <button type="submit" class="btn btn-primary">Salvar</button>
 </form>
 
 <script type="text/javascript">
-    $('#datePicker').datepicker({
+    $('#dataPicker').datepicker({
         format: "dd/mm/yyyy",
         language: "pt-BR",
         orientation: 'auto'
